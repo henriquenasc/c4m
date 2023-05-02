@@ -31,16 +31,17 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/dashboard', 'Home::dashboard', ['filter' => 'authGuard']);
 
-$routes->group('/login', function($routes) {
+$routes->group('/', function($routes) {
     $routes->get('', 'SignInController::index');
-    $routes->post('/signAuth', 'SignInController::signAuth');
-    $routes->get('/logout', 'SignInController::logOut');
+    $routes->get('login', 'SignInController::index');
+    $routes->post('signAuth', 'SignInController::signAuth');
+    $routes->get('logout', 'SignInController::logOut');
 });
 
-$routes->group('user', ['filter' => 'authGuard'] ,function($routes) {
-    $routes->get('/', 'User::index');
-    $routes->get('/edit', 'User::edit');
-    $routes->post('/update', 'User::update');
+$routes->group('user', ['filter' => 'authGuard'], function($routes) {
+    $routes->get('profile', 'UserController::index');
+    $routes->post('update', 'UserController::update');
+    $routes->post('uploadImage/(:num)', 'UserController::uploadProfileImage/$1');
 });
 
 /*
