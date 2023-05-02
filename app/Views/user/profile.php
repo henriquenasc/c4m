@@ -1,6 +1,8 @@
 <?= $this->extend('Layout/template') ?>
 
 <?= $this->section('content') ?>
+<?php $validation =  \Config\Services::validation(); ?>
+
 <div class="page-inner">
     <h4 class="page-title">Seu Perfil</h4>
     <div class="row">
@@ -81,7 +83,7 @@
                 <div class="card-header" style="background-image: url('../assets/img/blogpost.jpg')">
                     <div class="profile-picture">
                         <div class="avatar avatar-xl">
-                            <img src="<?= base_url().'uploads/users/images/' ?><?= $user->avatar ?>" alt="..." class="avatar-img rounded-circle">
+                            <img src="<?= base_url() . 'uploads/users/images/' ?><?= $user->avatar ?>" alt="..." class="avatar-img rounded-circle">
                         </div>
                     </div>
                 </div>
@@ -92,6 +94,11 @@
                     </div>
                     <br>
                     <div class="view-profile">
+                        <?php if(session()->has('errors')) : ?>
+                            <div class="text-danger">
+                                <?= session()->get('errors')['profile_image'] ?>
+                            </div>
+                        <?php endif; ?>
                         <span><?= session()->getFlashdata('success') ?></span>
                         <form action="<?= site_url('user/uploadImage/') ?><?= $user->id ?>" method="post" enctype="multipart/form-data">
                             <input type="file" name="profile_image" class="file">
