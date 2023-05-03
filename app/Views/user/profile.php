@@ -1,8 +1,6 @@
 <?= $this->extend('Layout/template') ?>
 
 <?= $this->section('content') ?>
-<?php $validation =  \Config\Services::validation(); ?>
-
 <div class="page-inner">
     <h4 class="page-title">Seu Perfil</h4>
     <div class="row">
@@ -80,10 +78,10 @@
         </div>
         <div class="col-md-4">
             <div class="card card-profile card-secondary">
-                <div class="card-header" style="background-image: url('../assets/img/blogpost.jpg')">
+                <div class="card-header" style="background-image: url('<?= base_url() ?>/assets/img/blogpost.jpg')">
                     <div class="profile-picture">
                         <div class="avatar avatar-xl">
-                            <img src="<?= base_url() . 'uploads/users/images/' ?><?= $user->avatar ?>" alt="..." class="avatar-img rounded-circle">
+                            <img src="<?= base_url() . 'uploads/users/images/' ?><?= $user->avatar ?>" alt="image de perfil" class="avatar-img rounded-circle">
                         </div>
                     </div>
                 </div>
@@ -94,7 +92,7 @@
                     </div>
                     <br>
                     <div class="view-profile">
-                        <?php if(session()->has('errors')) : ?>
+                        <?php if(session()->has('errors')): ?>
                             <div class="text-danger">
                                 <?= session()->get('errors')['profile_image'] ?>
                             </div>
