@@ -39,6 +39,7 @@ class SignInController extends BaseController
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'avatar' => $user->avatar,
                     'isLoggedIn' => true,
                 ];
                 $this->session->set($session_data);

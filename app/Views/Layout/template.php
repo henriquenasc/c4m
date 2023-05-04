@@ -193,27 +193,22 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									<img src="<?= site_url('') ?>/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+									<img src="<?= base_url().'uploads/users/images/'.session()->get('avatar') ?>" alt="..." class="avatar-img rounded-circle">
 								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-user animated fadeIn">
 								<li>
 									<div class="user-box">
-										<div class="avatar-lg"><img src="<?= site_url('') ?>/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
+										<div class="avatar-lg"><img src="<?= base_url().'uploads/users/images/'.session()->get('avatar') ?>" alt="image profile" class="avatar-img rounded"></div>
 										<div class="u-text">
 											<h4><?= session()->get('name') ?></h4>
-											<p class="text-muted"><?= session()->get('email') ?></p><a href="<?= site_url() ?>/user/profile" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+											<p class="text-muted"><?= session()->get('email') ?></p>
 										</div>
 									</div>
 								</li>
 								<li>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="<?= site_url() ?>/user/profile">perfil</a>
-									<!-- <a class="dropdown-item" href="#">My Balance</a>
-									<a class="dropdown-item" href="#">Inbox</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Account Setting</a>
-									<div class="dropdown-divider"></div> -->
 									<a class="dropdown-item" href="/SignInController/logOut">sair</a>
 								</li>
 							</ul>
@@ -233,57 +228,34 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="<?= site_url('') ?>/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+							<img src="<?= base_url().'uploads/users/images/'.session()->get('avatar') ?>" alt="..." class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
 									<?= session()->get('name') ?>
 									<span class="user-level">Administrator</span>
-									<span class="caret"></span>
 								</span>
 							</a>
-							<div class="clearfix"></div>
-
-							<div class="collapse in" id="collapseExample">
-								<ul class="nav">
-									<li>
-										<a href="#profile">
-											<span class="link-collapse">My Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">Edit Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#settings">
-											<span class="link-collapse">Settings</span>
-										</a>
-									</li>
-								</ul>
-							</div>
 						</div>
 					</div>
 					<ul class="nav">
 						<li class="nav-item active">
-							<a href="index.html">
+							<a href="<?= site_url('dashboard') ?>">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 						<li class="nav-section">
 							<span class="sidebar-mini-icon">
 								<i class="fa fa-ellipsis-h"></i>
 							</span>
-							<h4 class="text-section">Components</h4>
+							<h4 class="text-section">MENU</h4>
 						</li>
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-layer-group"></i>
-								<p>Base</p>
+								<p>Clientes</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="base">
@@ -293,53 +265,13 @@
 											<span class="sub-item">Avatars</span>
 										</a>
 									</li>
-									<li>
-										<a href="components/buttons.html">
-											<span class="sub-item">Buttons</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/gridsystem.html">
-											<span class="sub-item">Grid System</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/panels.html">
-											<span class="sub-item">Panels</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/notifications.html">
-											<span class="sub-item">Notifications</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/sweetalert.html">
-											<span class="sub-item">Sweet Alert</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/font-awesome-icons.html">
-											<span class="sub-item">Font Awesome Icons</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/flaticons.html">
-											<span class="sub-item">Flaticons</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/typography.html">
-											<span class="sub-item">Typography</span>
-										</a>
-									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#forms">
 								<i class="fas fa-pen-square"></i>
-								<p>Forms</p>
+								<p>Cadastros</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="forms">
@@ -356,7 +288,7 @@
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#tables">
 								<i class="fas fa-table"></i>
-								<p>Tables</p>
+								<p>Relatórios</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="tables">
@@ -377,7 +309,7 @@
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#maps">
 								<i class="fas fa-map-marker-alt"></i>
-								<p>Maps</p>
+								<p>Permissões</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="maps">
@@ -400,66 +332,7 @@
 								</ul>
 							</div>
 						</li>
-						<li class="nav-item">
-							<a data-toggle="collapse" href="#charts">
-								<i class="far fa-chart-bar"></i>
-								<p>Charts</p>
-								<span class="caret"></span>
-							</a>
-							<div class="collapse" id="charts">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="charts/charts.html">
-											<span class="sub-item">Chart Js</span>
-										</a>
-									</li>
-									<li>
-										<a href="charts/sparkline.html">
-											<span class="sub-item">Sparkline</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</li>
 						
-						<li class="nav-item">
-							<a href="widgets.html">
-								<i class="fas fa-desktop"></i>
-								<p>Widgets</p>
-								<span class="badge badge-count badge-success">4</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a data-toggle="collapse" href="#custompages">
-								<i class="fas fa-paint-roller"></i>
-								<p>Custom Pages</p>
-								<span class="caret"></span>
-							</a>
-							<div class="collapse" id="custompages">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="login.html">
-											<span class="sub-item">Login & Register 1</span>
-										</a>
-									</li>
-									<li>
-										<a href="login2.html">
-											<span class="sub-item">Login & Register 2</span>
-										</a>
-									</li>
-									<li>
-										<a href="userprofile.html">
-											<span class="sub-item">User Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="404.html">
-											<span class="sub-item">404</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</li>
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#submenu">
 								<i class="fas fa-bars"></i>
