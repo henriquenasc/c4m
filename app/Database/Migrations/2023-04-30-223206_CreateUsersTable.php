@@ -23,19 +23,32 @@ class CreateUsersTable extends Migration
                 'type'           => 'VARCHAR',
                 'constraint'     => '150',
             ],
+            'avatar' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '240',
+                'null'           => true,
+                'default'        => null,
+            ],
             'password' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => '240',
             ],
-            'image' => [
-                'type' => 'VARCHAR',
-                'constraint' => '240',
-                'null' => true,
-                'default' => null,
+            'phone' => [
+                'type'            => 'VARCHAR',
+                'constraint'      => '20',
+            ],
+            'gender' => [
+                'type'            => 'BOOLEAN',
+                'null'            => true,
             ],
             'active' => [
-                'type' => 'BOOLEAN',
-                'null' => false,
+                'type'            => 'BOOLEAN',
+                'null'            => false,
+                'default'         => 1,
+            ],
+            'date_of_birth' => [
+                'type'            => 'DATETIME',
+                'null'            => true,
             ],
             'created_at' => [
                 'type' => 'DATETIME',
