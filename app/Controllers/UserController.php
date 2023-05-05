@@ -37,6 +37,10 @@ class UserController extends BaseController
                 'gender'  => $this->request->getPost('gender'),
                 'date_of_birth'  => $this->request->getPost('date_of_birth'),
             ];
+            $session_data = [
+                'name' => $user['name'],
+            ];
+            $this->session->set($session_data);
             $this->userModel->update($id, $user);
         }
         return redirect()->to('user/profile');
@@ -63,7 +67,7 @@ class UserController extends BaseController
         {
             $data = ['user' => $user];
             session()->setFlashdata('errors', $this->validator->getErrors());
-            return view('user/profile', $data);
+            return redirect()->route('user/profile', $data);
         } else {
 
             $image = $this->request->getFile('profile_image');
@@ -81,6 +85,8 @@ class UserController extends BaseController
             $dataImage['avatar'] = $newUploadImageName;
             
             $image->move(ROOTPATH.'public/uploads/users/images', $newUploadImageName);
+            $session_data = ['avatar' => $newUploadImageName];
+            $this->session->set($session_data);
             $this->userModel->update($id, $dataImage);
 
             return redirect()->to('user/profile')->with('success', 'imagem atualizada com sucesso!');
