@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <form action="<?= site_url('user/update') ?>" method="post" class="card-body">
-                    <input type="hidden" id="id" name="id" value="<?= $user->id ?>">
+                    <input type="hidden" name="id" value="<?= $user->id ?>">
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="form-group form-group-default">
@@ -55,6 +55,7 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="form-group form-group-default">
@@ -66,8 +67,9 @@
                         <div class="col-md-6">
                             <div class="form-group form-group-default">
                                 <label>Confirmar senha</label>
-                                <input id="password" type="password" class="form-control" value="" placeholder="Confirmar nova senha...">
+                                <input id="confirmPassword" type="password" class="form-control" value="" placeholder="Confirmar nova senha...">
                             </div>
+                            <div id="msg" class="badge badge-ligh font-weight-bold"></div>
                         </div>
                     </div>
                     <div class="text-right mt-3 mb-3">
@@ -108,4 +110,65 @@
         </div>
     </div>
 </div>
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    // $('#userUpdate').submit(function(e) {
+    //     e.preventDefault();
+    //     const formData = $("#userUpdate").serialize();
+    //     $.ajax({
+    //         url: '',
+    //         method: 'post',
+    //         data: formData,
+    //         success: function(response) {
+    //                 const message = 'Informações atualizadas com sucesso!';
+    //                 const state = 'success';
+    //                 getNotify(message, state);
+    //             },
+    //             error: function(response) {
+    //                 const message = 'Erro ao atualizar as informações! Tente novamente...';
+    //                 const state = 'danger';
+    //                 getNotify(message, state);
+    //         }
+    //     });
+    // });
+
+    <?php if(session()->has('success_update')): ?>
+        getNotify("<?= session()->get('success_update') ?>", "primary");
+    <?php elseif(session()->has('success_update')): ?>
+        getNotify("<?= session()->get('error_update') ?>", "danger");
+    <?php elseif(session()->has('success_password_update')): ?>
+        getNotify("<?= session()->get('success_password_update') ?>", "success");
+    <?php endif; ?>
+            
+    function getNotify(message, state) {
+        var content = {};
+        content.title = 'Notificação';
+        content.message = message;
+        content.icon = 'fa fa-bell';
+        
+        $.notify(content,{
+            type: state,
+            placement: {
+                from: 'top',
+                align: 'center'
+            },
+            time: 1000,
+            delay: 2000,
+        });
+    }
+
+    $(document).ready(function() {
+        $("#confirmPassword").keyup(function() {
+            if($("#password").val() !== "") {
+                $("#password").val() == $("#confirmPassword").val() ?
+                    $("#msg").html("As senha são iguais!").css("color", "green") :
+                    $("#msg").html("As senha não são iguais!").css("color", "red");
+            } else {
+                $("#msg").html("");
+            }
+        });
+    });
+</script>
 <?= $this->endSection() ?>

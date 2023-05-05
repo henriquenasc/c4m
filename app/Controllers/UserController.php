@@ -23,13 +23,27 @@ class UserController extends BaseController
         return view('user/profile', $data);
     }
 
+    private function passwordHash()
+    {
+        $password = $this->request->getPost('password');
+        $passwordHash = password_hash((string) $password, PASSWORD_BCRYPT);
+        return $passwordHash;
+    }
+
     public function update()
     {
-        $id = $this->request->getVar('id');
+        $id = $this->request->getPost('id');
         if(!empty($this->request->getPost('password')))
-        {
-            $user = $this->request->getPost();
+        {   
+            $user = [
+                'name' => $this->request->getPost('name'),
+                'phone'  => $this->request->getPost('phone'),
+                'gender'  => $this->request->getPost('gender'),
+                'date_of_birth'  => $this->request->getPost('date_of_birth'),
+                'password' => $this->passwordHash()
+            ];
             $this->userModel->update($id, $user);
+            $this->session->setFlashdata('success_password_update', 'Sua senha foi atualizada com sucesso!');
         } else {
             $user = [
                 'name' => $this->request->getPost('name'),
@@ -37,11 +51,14 @@ class UserController extends BaseController
                 'gender'  => $this->request->getPost('gender'),
                 'date_of_birth'  => $this->request->getPost('date_of_birth'),
             ];
-            $session_data = [
-                'name' => $user['name'],
-            ];
-            $this->session->set($session_data);
-            $this->userModel->update($id, $user);
+            if($this->userModel->update($id, $user))
+            {
+                $session_data = ['name' => $user['name']];
+                $this->session->set($session_data);
+                $this->session->setFlashdata('success_update', 'Informações atualizadas com sucesso!');
+            } else {
+                $this->session->setFlashdata('error_update', 'Erro ao atualizar as informações!');
+            }
         }
         return redirect()->to('user/profile');
     }
