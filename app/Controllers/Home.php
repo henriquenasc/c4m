@@ -6,6 +6,7 @@ class Home extends BaseController
 {
     public function dashboard()
     {
-        return view('dashboard');
+        $data ['title'] = 'C4M - Dashboard';
+        return view('dashboard', $data);
     }
 }
