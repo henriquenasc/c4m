@@ -33,11 +33,11 @@
 		<!--
 				Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
 		-->
-		<div class="main-header" data-background-color="purple">
+		<div class="main-header" data-background-color="light-blue">
 			<!-- Logo Header -->
 			<div class="logo-header">
 				
-				<a href="index.html" class="logo">
+				<a class="logo">
 					<img src="<?= site_url('') ?>/assets/img/logoazzara.svg" alt="navbar brand" class="navbar-brand">
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -228,7 +228,7 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="<?= base_url().'uploads/users/images/'.session()->get('avatar') ?>" alt="..." class="avatar-img rounded-circle">
+							<img src="<?= base_url().'uploads/users/images/'.session()->get('avatar') ?>" alt="foto de perfil" class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -242,7 +242,7 @@
 					<ul class="nav">
 						<li class="nav-item active">
 							<a href="<?= site_url('dashboard') ?>">
-								<i class="fas fa-home"></i>
+								<i class="flaticon-home"></i>
 								<p>Dashboard</p>
 							</a>
 						</li>
@@ -253,24 +253,14 @@
 							<h4 class="text-section">MENU</h4>
 						</li>
 						<li class="nav-item">
-							<a data-toggle="collapse" href="#base">
-								<i class="fas fa-layer-group"></i>
+							<a data-toggle="collapse" href="#clients">
+								<i class="flaticon-user-1"></i>
 								<p>Clientes</p>
-								<span class="caret"></span>
 							</a>
-							<div class="collapse" id="base">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="components/avatars.html">
-											<span class="sub-item">Avatars</span>
-										</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#forms">
-								<i class="fas fa-pen-square"></i>
+								<i class="flaticon-layers-1"></i>
 								<p>Cadastros</p>
 								<span class="caret"></span>
 							</a>
@@ -278,16 +268,20 @@
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="forms/forms.html">
-											<span class="sub-item">Basic Form</span>
+											<span class="sub-item">Cadastrar Colaborador</span>
 										</a>
 									</li>
-									
+									<li>
+										<a href="forms/forms.html">
+											<span class="sub-item">Permissão de Acesso</span>
+										</a>
+									</li>
 								</ul>
 							</div>
 						</li>
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a data-toggle="collapse" href="#tables">
-								<i class="fas fa-table"></i>
+								<i class="flaticon-graph-2"></i>
 								<p>Relatórios</p>
 								<span class="caret"></span>
 							</a>
@@ -295,94 +289,29 @@
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="tables/tables.html">
-											<span class="sub-item">Basic Table</span>
+											<span class="sub-item">Clientes</span>
 										</a>
 									</li>
 									<li>
 										<a href="tables/datatables.html">
-											<span class="sub-item">Datatables</span>
+											<span class="sub-item">Armazenamento usado</span>
 										</a>
 									</li>
 								</ul>
 							</div>
-						</li>
+						</li> -->
 						<li class="nav-item">
-							<a data-toggle="collapse" href="#maps">
-								<i class="fas fa-map-marker-alt"></i>
+							<a data-toggle="collapse" href="#permissions">
+								<i class="flaticon-lock-1"></i>
 								<p>Permissões</p>
-								<span class="caret"></span>
 							</a>
-							<div class="collapse" id="maps">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="maps/googlemaps.html">
-											<span class="sub-item">Google Maps</span>
-										</a>
-									</li>
-									<li>
-										<a href="maps/fullscreenmaps.html">
-											<span class="sub-item">Full Screen Maps</span>
-										</a>
-									</li>
-									<li>
-										<a href="maps/jqvmap.html">
-											<span class="sub-item">JQVMap</span>
-										</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 						
 						<li class="nav-item">
-							<a data-toggle="collapse" href="#submenu">
-								<i class="fas fa-bars"></i>
-								<p>Menu Levels</p>
-								<span class="caret"></span>
+							<a data-toggle="collapse" href="#settings">
+								<i class="flaticon-settings"></i>
+								<p>Configurações</p>
 							</a>
-							<div class="collapse" id="submenu">
-								<ul class="nav nav-collapse">
-									<li>
-										<a data-toggle="collapse" href="#subnav1">
-											<span class="sub-item">Level 1</span>
-											<span class="caret"></span>
-										</a>
-										<div class="collapse" id="subnav1">
-											<ul class="nav nav-collapse subnav">
-												<li>
-													<a href="#">
-														<span class="sub-item">Level 2</span>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<span class="sub-item">Level 2</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</li>
-									<li>
-										<a data-toggle="collapse" href="#subnav2">
-											<span class="sub-item">Level 1</span>
-											<span class="caret"></span>
-										</a>
-										<div class="collapse" id="subnav2">
-											<ul class="nav nav-collapse subnav">
-												<li>
-													<a href="#">
-														<span class="sub-item">Level 2</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</li>
-									<li>
-										<a href="#">
-											<span class="sub-item">Level 1</span>
-										</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 					</ul>
 				</div>
