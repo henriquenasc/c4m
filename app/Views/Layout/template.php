@@ -208,7 +208,7 @@
 								</li>
 								<li>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="<?= site_url() ?>/user/profile">perfil</a>
+									<a class="dropdown-item" href="<?= site_url() ?>user/profile">perfil</a>
 									<a class="dropdown-item" href="/SignInController/logOut">sair</a>
 								</li>
 							</ul>
