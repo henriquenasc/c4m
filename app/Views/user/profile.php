@@ -9,7 +9,7 @@
             <div class="card card-with-nav">
                 <div class="card-header">
                     <div class="row row-nav-line">
-                        <ul class="nav nav-tabs nav-line nav-color-secondary" role="tablist">
+                        <ul class="nav nav-tabs nav-line nav-color-info" role="tablist">
                             <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#home" role="tab" aria-selected="true">Perfil</a> </li>
                             <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#files" role="tab" aria-selected="false">Arquivos</a> </li>
                         </ul>
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="text-right mt-3 mb-3">
-                                <button class="btn btn-success">salvar alterações</button>
+                                <button class="btn btn-warning">salvar alterações</button>
                             </div>
                         </form>
                     </div>
@@ -115,15 +115,9 @@
                     </div>
                     <br>
                     <div class="view-profile">
-                        <?php if (session()->has('errors')) : ?>
-                            <div class="text-danger">
-                                <?= session()->get('errors')['profile_image'] ?>
-                            </div>
-                        <?php endif; ?>
-                        <span><?= session()->getFlashdata('success') ?></span>
                         <form action="<?= site_url('user/uploadImage/') ?><?= $user->id ?>" method="post" enctype="multipart/form-data">
-                            <input type="file" name="profile_image" class="file">
-                            <button class="btn btn-secondary btn-block">Alterar foto</button>
+                            <input id="inputUploadAvatar" type="file" name="profile_image" class="file">
+                            <button class="btn btn-info btn-block">Alterar foto</button>
                         </form>
                     </div>
                 </div>
@@ -134,36 +128,35 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('assets/js/plugin/dropzone/dropzone.min.js')?>"></script>
+<script src="<?= base_url('assets/js/plugin/dropzone/dropzone.min.js') ?>"></script>
 <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 <script>
-    // $('#userUpdate').submit(function(e) {
-    //     e.preventDefault();
-    //     const formData = $("#userUpdate").serialize();
-    //     $.ajax({
-    //         url: '',
-    //         method: 'post',
-    //         data: formData,
-    //         success: function(response) {
-    //                 const message = 'Informações atualizadas com sucesso!';
-    //                 const state = 'success';
-    //                 getNotify(message, state);
-    //             },
-    //             error: function(response) {
-    //                 const message = 'Erro ao atualizar as informações! Tente novamente...';
-    //                 const state = 'danger';
-    //                 getNotify(message, state);
-    //         }
-    //     });
-    // });
-
+    // Get flash data update user
     <?php if (session()->has('success_update')) : ?>
-        getNotify("<?= session()->get('success_update') ?>", "primary");
+        getNotify("<?= session()->get('success_update') ?>", "info");
     <?php elseif (session()->has('success_update')) : ?>
         getNotify("<?= session()->get('error_update') ?>", "danger");
     <?php elseif (session()->has('success_password_update')) : ?>
-        getNotify("<?= session()->get('success_password_update') ?>", "primary");
+        getNotify("<?= session()->get('success_password_update') ?>", "info");
     <?php endif; ?>
+
+    // Get flash data update user avatar
+    <?php if (session()->has('success_avatar')) : ?>
+        getSwal("Sucesso!", "<?= session()->get('success_avatar') ?>", "success", "btn btn-success");
+    <?php elseif (session()->has('errors')) : ?>
+        getSwal("Falha ao atualizar imagem!", "<?= session()->get('errors')['profile_image'] ?>", "error", "btn btn-danger");
+    <?php endif; ?>
+
+    function getSwal(title, message, icon, className) {
+        swal(title, message, {
+            icon: icon,
+            buttons: {
+                confirm: {
+                    className: className
+                }
+            },
+        });
+    }
 
     function getNotify(message, state) {
         var content = {};
