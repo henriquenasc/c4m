@@ -42,6 +42,7 @@ $routes->group('user', ['filter' => 'authGuard'], function($routes) {
     $routes->get('profile', 'UserController::index');
     $routes->post('update', 'UserController::update');
     $routes->post('uploadImage/(:num)', 'UserController::uploadProfileImage/$1');
+    $routes->post('uploadFiles/(:num)', 'UserController::uploadFiles/$1');
 });
 
 /*
