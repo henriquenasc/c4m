@@ -80,6 +80,6 @@ class CreateClientsTable extends Migration
 
     public function down()
     {
-        $this->forge->dropDatabase("clients");
+        $this->forge->droptable("clients");
     }
 }
