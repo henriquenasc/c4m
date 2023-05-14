@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use PHPUnit\TextUI\XmlConfiguration\Group;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -43,6 +45,10 @@ $routes->group('user', ['filter' => 'authGuard'], function($routes) {
     $routes->post('update', 'UserController::update');
     $routes->post('uploadImage/(:num)', 'UserController::uploadProfileImage/$1');
     $routes->post('uploadFiles', 'UserController::uploadFiles');
+});
+
+$routes->group('clients', ['filter' => 'authGuard'], function($routes) {
+    $routes->get('', 'ClientController::index');
 });
 
 /*
