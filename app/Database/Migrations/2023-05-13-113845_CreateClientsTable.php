@@ -15,12 +15,12 @@ class CreateClientsTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'razao_social' => [
+            'company' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => '150',
                 'null' => false,
             ],
-            'fantasia' => [
+            'company_name' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => '150',
                 'null' => false,
@@ -40,6 +40,23 @@ class CreateClientsTable extends Migration
                 'null'           => true,
                 'default'        => null,
             ],
+            'phone' => [
+                'type'            => 'VARCHAR',
+                'constraint'      => '20',
+            ],
+            'cel_phone' => [
+                'type'            => 'VARCHAR',
+                'constraint'      => '20',
+            ],
+            'gender' => [
+                'type'            => 'BOOLEAN',
+                'null'            => true,
+            ],
+            'active' => [
+                'type' => 'BOOLEAN',
+                'null' => false,
+                'default' => 1
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
@@ -58,11 +75,11 @@ class CreateClientsTable extends Migration
         ]);
         $this->forge->addKey("id", true);
         $this->forge->addUniqueKey("cnpj_cpf");
-        $this->forge->createTable("clientes");
+        $this->forge->createTable("clients");
     }
 
     public function down()
     {
-        //
+        $this->forge->dropDatabase("clients");
     }
 }
