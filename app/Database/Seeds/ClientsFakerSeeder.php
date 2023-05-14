@@ -11,20 +11,20 @@ class ClientsFakerSeeder extends Seeder
     {
         $clientModel = new ClientModel();
         $faker = \Faker\Factory::create('pt_BR');
-        
+
         $clientsCreate = 1000;
         $clientsPush = [];
 
         for($c = 0; $c < $clientsCreate; $c++)
         {
             array_push($clientsPush, [
-                'company' => $faker->company(),
-                'company_name' => $faker->companySuffix(),
-                'CNPJ/CPF' => $faker->cnpj(false),
+                'company' => $faker->name(),
+                'company_name' => $faker->company(),
+                'cnpj_cpf' => $faker->cnpj(false),
                 'phone' => $faker->phone(false),
                 'cel_phone' => $faker->cellphone(false),
                 'email' => $faker->unique()->email,
-                'status' => $faker->numberBetween(0, 1),
+                'active' => $faker->numberBetween(0, 1),
             ]);
         }
 

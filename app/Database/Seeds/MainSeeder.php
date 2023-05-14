@@ -8,7 +8,7 @@ class MainSeeder extends Seeder
 {
     public function run()
     {
-        $this->call('UserFakerSeeder');
+        $this->call('UserSeeder');
         $this->call('ClientsFakerSeeder');
     }
 }
