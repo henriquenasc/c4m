@@ -253,7 +253,7 @@
 							<h4 class="text-section">MENU</h4>
 						</li>
 						<li class="nav-item">
-							<a data-toggle="collapse" href="#clients">
+							<a href="<?= site_url('clients') ?>">
 								<i class="flaticon-user-1"></i>
 								<p>Clientes</p>
 							</a>
