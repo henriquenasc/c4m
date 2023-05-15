@@ -49,6 +49,7 @@ $routes->group('user', ['filter' => 'authGuard'], function($routes) {
 
 $routes->group('clients', ['filter' => 'authGuard'], function($routes) {
     $routes->get('', 'ClientController::index');
+    $routes->get('getAllClients', 'ClientController::getAllClients');
 });
 
 /*
