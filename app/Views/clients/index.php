@@ -27,6 +27,7 @@
                                 <th>CNPJ</th>
                                 <th>E-mail</th>
                                 <th>Status</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -36,6 +37,7 @@
                                 <th>CNPJ</th>
                                 <th>E-mail</th>
                                 <th>Status</th>
+                                <th>Ações</th>
                             </tr>
                         </tfoot>
 
@@ -68,6 +70,9 @@
             {
                 "data": "active"
             },
+            {
+                "data": "actions",
+            }
         ],
         "deferRender": true,
         "processing": true,
