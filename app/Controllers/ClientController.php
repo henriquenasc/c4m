@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ClientModel;
+use CodeIgniter\Router\Exceptions\RedirectException;
 
 class ClientController extends BaseController
 {
@@ -70,5 +71,15 @@ class ClientController extends BaseController
         ];
 
         return $this->response->setJSON($response);
+    }
+
+    public function getClient($id)
+    {
+        $client = $this->clientModel->find($id);
+        $data = [
+            'title' => 'Perfil usuário',
+            'client' => $client,
+        ];
+        return view('clients/profile', $data);
     }
 }
