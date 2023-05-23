@@ -83,7 +83,8 @@
                     <div class="tab-pane fade" id="files" role="tab" aria-labelledby="tab">
                         <div class="card" id="dropzone">
                             <div class="card-body">
-                                <form action="user/test" method="post" class="dropzone dz-clickable" id="dropzonewidget" enctype="multipart/form-data">
+                                <form action="<?= site_url('user/uploadFiles') ?>" method="post" class="dropzone dz-clickable" id="dropzone" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="<?= $user->id ?>">
                                     <div class="dz-message" data-dz-message="">
                                         <div class="icon">
                                             <i class="flaticon-file"></i>
@@ -146,6 +147,22 @@
     <?php elseif (session()->has('errors')) : ?>
         getSwal("Falha ao atualizar imagem!", "<?= session()->get('errors')['profile_image'] ?>", "error", "btn btn-danger");
     <?php endif; ?>
+
+    Dropzone.options.dropzone = {
+        addRemoveLinks: true,
+        autoDiscover: false,
+        uploadMultiple: true,
+        parallelUploads: 10,
+        maxFiles: 10,
+        acceptedFiles: ".jpeg,.jpg,.png",
+        autoProcessQueue: true,
+        success: function(file, response) {
+            console.log(response);
+        },
+        error: function(file, response) {
+            return false;
+        }
+    };
 
     function getSwal(title, message, icon, className) {
         swal(title, message, {
