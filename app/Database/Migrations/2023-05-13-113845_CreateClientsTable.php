@@ -34,12 +34,6 @@ class CreateClientsTable extends Migration
                 'type'           => 'VARCHAR',
                 'constraint'     => '150',
             ],
-            'avatar' => [
-                'type'           => 'VARCHAR',
-                'constraint'     => '240',
-                'null'           => true,
-                'default'        => null,
-            ],
             'phone' => [
                 'type'            => 'VARCHAR',
                 'constraint'      => '20',
@@ -56,6 +50,30 @@ class CreateClientsTable extends Migration
                 'type' => 'BOOLEAN',
                 'null' => false,
                 'default' => 1
+            ],
+            'address' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+            ],
+            'number_house' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+            ],
+            'district' => [
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+            ],
+            'city' => [
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+            ],
+            'state' => [
+                'type' => 'CHAR',
+                'constraint' => '255',
+            ],
+            'zipcode' => [
+                'type' => 'VARCHAR',
+                'constraint' => '8',
             ],
             'created_at' => [
                 'type' => 'DATETIME',
