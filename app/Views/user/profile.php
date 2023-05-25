@@ -1,6 +1,11 @@
 <?= $this->extend('Layout/template') ?>
 
 <?= $this->section('title') ?><?= $title ?><?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
+<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 <div class="page-inner">
     <h4 class="page-title">Seu Perfil</h4>
@@ -130,7 +135,6 @@
 
 <?= $this->section('scripts') ?>
 <script src="<?= base_url('assets/js/plugin/dropzone/dropzone.min.js') ?>"></script>
-<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 <script>
     // Get flash data update user
     <?php if (session()->has('success_update')) : ?>
@@ -148,21 +152,38 @@
         getSwal("Falha ao atualizar imagem!", "<?= session()->get('errors')['profile_image'] ?>", "error", "btn btn-danger");
     <?php endif; ?>
 
-    Dropzone.options.dropzone = {
-        addRemoveLinks: true,
-        autoDiscover: false,
-        uploadMultiple: true,
-        parallelUploads: 10,
-        maxFiles: 10,
-        acceptedFiles: ".jpeg,.jpg,.png",
-        autoProcessQueue: true,
-        success: function(file, response) {
-            console.log(response);
-        },
-        error: function(file, response) {
-            return false;
-        }
-    };
+    // Ajax upload user files
+    $(function() {
+        //Dropzone class
+        var myDropzone = new Dropzone(".dropzone", {
+            url: "<?= base_url('user/uploadFiles') ?>",
+            paramName: "files",
+            maxFilesize: 25,
+            maxFiles: 5,
+            acceptedFiles: "image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.odt,.rtf",
+            addRemoveLinks: true,
+            dictRemoveFile: "Excluir",
+            dictCancelUpload: "Cancelar upload!",
+            dictMaxFilesExceeded: "Envie no máximo 5 arquivos por vez!",
+            removedfile: function(file) {
+                const fileName = file.name;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '<?= base_url('user/uploadFiles') ?>',
+                    data: {
+                        name: fileName,
+                        request: 'delete',
+                        user_id: <?= $user->id ?>,
+                    },
+                });
+
+                var _ref;
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            }
+        });
+    });
+    Dropzone.autoDiscover = false;
 
     function getSwal(title, message, icon, className) {
         swal(title, message, {
