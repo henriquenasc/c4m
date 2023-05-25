@@ -111,38 +111,53 @@ class UserController extends BaseController
         }
     }
 
-    public function uploadFiles($id)
+    public function uploadFiles()
     {
-        $user_id = $this->userModel->find($id);
-
-        $rules = $this->validate([
-            'files' =>
-            'uploaded[files]',
-            'ext_in[files,image/jpg,image/jpeg,image/png/pdf]',
-            'max_size[files,10024]',
-        ], [
-            'profile_image' => [
-                'uploaded' => 'Selecione uma arquivo!',
-                'ext_in' => 'Tipo de arquivo não suportado!',
-                'max_size' => 'Tamanho máximo de imagem suportada: 10MB',
-            ],
-        ]);
-
-        if(!$rules)
+        if($this->request->getPost('id'))
         {
-            echo "error";
+            $id = $this->request->getPost('id');
+            $user = $this->userModel->find($id);
+            
+            $validate = $this->validate([
+                'files' =>
+                'uploaded[files]','ext_in[files,jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv,tsv,ppt,pptx,odt,rtf]','max_size[files,25000]',
+            ], [
+                'files' => [
+                    'uploaded' => 'Selecione um arquivo!',
+                    'ext_in' => 'Tipo de arquivo não suportado!',
+                    'max_size' => 'Tamanho máximo de arquivo permitido: 25MB',
+                ],
+            ]);
+            
+            if(!$validate)
+            {
+                var_dump($this->validator->getErrors());
+            } else {
+                if($file = $this->request->getFile('files'))
+                {
+                    if ($file->isValid() && ! $file->hasMoved())
+                    {
+                        
+                        $data = [
+                            'name' =>  $file->getName(),
+                            'type'  => $file->getClientMimeType(),
+                            'user_id' => $user->id,
+                        ];
+        
+                        $file->move(ROOTPATH.'public/uploads/users/files');
+                        $this->fileModel->save($data);
+                    }
+                }
+            }
         } else {
-            $files = $this->request->getFile('files');
-            $files->move(ROOTPATH.'public/uploads/users/files', $files->getName());
-
-            $data = [
-                'name' =>  $files->getName(),
-                'type'  => $files->getClientMimeType(),
-                'user_id' => $user_id,
-             ];
-
-             $this->fileModel->save($data);
-             echo "arquivos salvos";
+            $user_id = $this->request->getPost('user_id');
+            $fileName = $this->request->getPost('name');
+            $file = ROOTPATH.'public/uploads/users/files'.'/'.$fileName;
+            $this->fileModel->where('name', $fileName)
+                            ->where('user_id', $user_id)
+                            ->delete();
+            unlink($file);
+            exit;
         }
     }
 }
