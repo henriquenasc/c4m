@@ -159,7 +159,7 @@
             url: "<?= base_url('user/uploadFiles') ?>",
             paramName: "files",
             maxFilesize: 25,
-            maxFiles: 5,
+            maxFiles: 10,
             acceptedFiles: "image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.odt,.rtf",
             addRemoveLinks: true,
             dictRemoveFile: "Excluir",
@@ -182,6 +182,7 @@
                 return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
             }
         });
+        myDropzone.on("maxfilesexceeded", function(file) { this.removeFile(file); });
     });
     Dropzone.autoDiscover = false;
 
